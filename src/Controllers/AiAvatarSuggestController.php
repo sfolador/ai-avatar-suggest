@@ -8,9 +8,11 @@ use Sfolador\AiAvatarSuggest\Facades\AiAvatarSuggest;
 
 class AiAvatarSuggestController extends Controller
 {
-    public function suggest(Request $request){
+    public function suggest(Request $request)
+    {
         $prompt = $request->get('prompt');
         $suggestion = AiAvatarSuggest::suggest($prompt);
+
         return response()->json([
             'suggestion' => $suggestion,
         ]);

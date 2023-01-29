@@ -24,7 +24,6 @@ it('should suggest a correct url', function () {
 });
 
 it('should return a suggestion from a controller', function () {
-
     $initialInput = 'draw a developer with a laptop';
     AiAvatarSuggest::fake();
 

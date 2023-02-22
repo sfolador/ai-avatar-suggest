@@ -7,7 +7,6 @@ use Sfolador\AiAvatarSuggest\Facades\AiService;
 use Sfolador\AiAvatarSuggest\Services\AiServiceFake;
 use Sfolador\AiAvatarSuggest\Services\AiServiceInterface;
 
-
 beforeEach(function () {
     config()->set('ai-email-suggest.openai_key', 'test_api_key');
 });

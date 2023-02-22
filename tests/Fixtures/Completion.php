@@ -16,6 +16,6 @@ function completion(): array
                 'url' => fake()->url(),
 
             ],
-        ]
+        ],
     ];
 }

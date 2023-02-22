@@ -28,17 +28,32 @@ This is the contents of the published config file:
 ```php
 return [
     'openai_key' => env('OPENAI_KEY'),
-    'default_size' => '256x256'
+    'default_size' => '256x256',
+    'default_route' => 'ai-avatar-suggest',
+    'use_cache' => true,
+    'throttle' => [
+        'enabled' => false,
+        'max_attempts' => 60,
+        'prefix' => 'ai-avatar-suggest',
+    ],
 ];
 ```
 
 *Remember to set your OpenAI key in your .env file.*
+
+If the `use_cache` option is set to `true`, the package will use the default cache driver to prevent
+unnecessary calls to the OpenAI API. You can change the cache driver in your `config/cache.php` file.
 
 ## Usage
 
 ```php
 $aiAvatarSuggest = new Sfolador\AiAvatarSuggest();
 echo $aiAvatarSuggest->suggest('A developer with a red beard and a cool hat');
+
+//or if you want to use the facade
+
+echo AiAvatarSuggest::suggest('A developer with a red beard and a cool hat');
+
 ```
 You can also invoke the generation by calling the route `ai-avatar-suggest` with a `prompt` parameter.
 The response will be a JSON with the suggested email, such as:
@@ -48,6 +63,16 @@ The response will be a JSON with the suggested email, such as:
   "suggestion": "https://www.example.com/link/to/avatar"
 }
 ```
+
+
+## Cache clear
+
+If you use a Cache driver that supports tags, you can clear the cache by invoking the command:
+
+```bash
+php artisan ai-avatar-suggest:clear-cache
+```
+
 
 ## Testing
 

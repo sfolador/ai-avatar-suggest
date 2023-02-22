@@ -3,7 +3,12 @@
 use function Pest\Laravel\post;
 use Sfolador\AiAvatarSuggest\Facades\AiAvatarSuggest;
 
-it('can suggest an email', function () {
+beforeEach(function () {
+    $this->prompt = 'text@example.com';
+    config()->set('ai-email-suggest.openai_key', 'test_api_key');
+});
+
+it('can suggest an avatar', function () {
     AiAvatarSuggest::fake();
 
     $suggestion = AiAvatarSuggest::suggest('draw a developer with a laptop');

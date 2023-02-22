@@ -2,6 +2,11 @@
 
 namespace Sfolador\AiAvatarSuggest;
 
+use OpenAI;
+use Sfolador\AiAvatarSuggest\Commands\AiSuggestClearCache;
+use Sfolador\AiAvatarSuggest\Middleware\AiAvatarSuggestThrottle;
+use Sfolador\AiAvatarSuggest\Services\AiService;
+use Sfolador\AiAvatarSuggest\Services\AiServiceInterface;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,13 +22,30 @@ class AiAvatarSuggestServiceProvider extends PackageServiceProvider
         $package
             ->name('ai-avatar-suggest')
             ->hasConfigFile()
-            ->hasRoutes('ai_avatar_suggest_routes');
+            ->hasViews()
+            ->hasRoutes('ai_avatar_suggest_routes')
+            ->hasCommand(AiSuggestClearCache::class);
     }
 
-    public function registeringPackage()
+    public function registeringPackage(): void
     {
-        $this->app->bind(AiAvatarSuggestInterface::class, function () {
-            return new AiAvatarSuggest();
+        $this->app->bind(AiServiceInterface::class, function () {
+            $apiKey = config('ai-avatar-suggest.openai_key') ?? '';
+            /** @phpstan-ignore-next-line  */
+            $client = OpenAI::client($apiKey);
+
+            return new AiService($client);
         });
+
+        $this->app->bind(AiAvatarSuggestInterface::class, function () {
+            /**
+             * @var AiServiceInterface $aiEmailSuggestInterface
+             */
+            $aiAvatarSuggestInterface = app(AiServiceInterface::class);
+
+            return new AiAvatarSuggest($aiAvatarSuggestInterface);
+        });
+
+        app('router')->aliasMiddleware('ai-suggest-throttle', AiAvatarSuggestThrottle::class);
     }
 }

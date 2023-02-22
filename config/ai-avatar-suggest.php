@@ -2,8 +2,8 @@
 
 // config for Sfolador/AiAvatarSuggest
 return [
-    'model' => 'text-davinci-003',
     'openai_key' => env('OPENAI_KEY'),
+    'default_size' => '256x256',
     'default_route' => 'ai-avatar-suggest',
     'use_cache' => true,
     'throttle' => [

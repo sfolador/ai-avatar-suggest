@@ -3,7 +3,7 @@
 namespace Sfolador\AiAvatarSuggest\Services;
 
 use OpenAI;
-use OpenAI\Responses\Completions\CreateResponse;
+use OpenAI\Responses\Images\CreateResponse;
 
 class AiService implements AiServiceInterface
 {
@@ -13,7 +13,7 @@ class AiService implements AiServiceInterface
 
     public function getSuggestion(string $prompt): ?CreateResponse
     {
-        return  $this->client->completions()->create([
+        return  $this->client->images()->create([
             'prompt' => $prompt,
             'n' => 1,
             'size' => config('ai-avatar-suggest.default_size'),

@@ -4,7 +4,7 @@ namespace Sfolador\AiAvatarSuggest;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use OpenAI\Responses\Completions\CreateResponse;
+use OpenAI\Responses\Images\CreateResponse;
 use Sfolador\AiAvatarSuggest\Services\AiServiceInterface;
 
 class AiAvatarSuggest implements AiAvatarSuggestInterface
@@ -38,11 +38,11 @@ class AiAvatarSuggest implements AiAvatarSuggestInterface
             return '';
         }
 
-        if (collect($response->choices)->first()?->text === '' || ! collect($response->choices)->first()) {
+        if ($response->data[0]?->url === '') {
             return '';
         }
 
-        return Str::of(collect($response->choices)->first()->text)->trim()->lower()->value();
+        return $response->data[0]?->url;
     }
 
     public function createPrompt(string $description): string

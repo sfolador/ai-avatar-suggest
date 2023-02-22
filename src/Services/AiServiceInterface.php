@@ -2,7 +2,7 @@
 
 namespace Sfolador\AiAvatarSuggest\Services;
 
-use OpenAI\Responses\Completions\CreateResponse;
+use OpenAI\Responses\Images\CreateResponse;
 
 interface AiServiceInterface
 {

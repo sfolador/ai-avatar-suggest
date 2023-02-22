@@ -11,12 +11,12 @@ use Sfolador\AiAvatarSuggest\AiAvatarSuggestInterface;
  */
 class AiAvatarSuggest extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return AiAvatarSuggestInterface::class;
     }
 
-public static function fake()
+public static function fake(): void
 {
     static::swap(new AiAvatarSuggestFake());
 }

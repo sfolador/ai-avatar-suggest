@@ -31,6 +31,7 @@ class AiAvatarSuggestServiceProvider extends PackageServiceProvider
     {
         $this->app->bind(AiServiceInterface::class, function () {
             $apiKey = config('ai-avatar-suggest.openai_key') ?? '';
+
             /** @phpstan-ignore-next-line  */
             $client = OpenAI::client($apiKey);
 
@@ -39,7 +40,7 @@ class AiAvatarSuggestServiceProvider extends PackageServiceProvider
 
         $this->app->bind(AiAvatarSuggestInterface::class, function () {
             /**
-             * @var AiServiceInterface $aiEmailSuggestInterface
+             * @var AiServiceInterface $aiAvatarSuggestInterface
              */
             $aiAvatarSuggestInterface = app(AiServiceInterface::class);
 

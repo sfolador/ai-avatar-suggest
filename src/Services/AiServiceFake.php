@@ -2,7 +2,7 @@
 
 namespace Sfolador\AiAvatarSuggest\Services;
 
-use OpenAI\Responses\Completions\CreateResponse;
+use OpenAI\Responses\Images\CreateResponse;
 
 class AiServiceFake implements AiServiceInterface
 {
@@ -11,21 +11,11 @@ class AiServiceFake implements AiServiceInterface
         return CreateResponse::from(
             [
                 'id' => '1',
-                'object' => 'text_completion',
                 'created' => 1,
-                'model' => 'davinci:2020-05-03',
-                'choices' => [
+                'data' => [
                     [
-                        'text' => 'test.com',
-                        'index' => 1,
-                        'logprobs' => null,
-                        'finish_reason' => 'stop',
+                        'url' => 'https://example.com',
                     ],
-                ],
-                'usage' => [
-                    'prompt_tokens' => 1,
-                    'completion_tokens' => 1,
-                    'total_tokens' => 1,
                 ],
             ]
         );

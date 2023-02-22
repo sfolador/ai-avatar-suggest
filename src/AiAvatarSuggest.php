@@ -38,11 +38,11 @@ class AiAvatarSuggest implements AiAvatarSuggestInterface
             return '';
         }
 
-        if ($response->data[0]?->url === '') {
+        if ($response->data[0]->url === '') {
             return '';
         }
 
-        return $response->data[0]?->url;
+        return $response->data[0]->url;
     }
 
     public function createPrompt(string $description): string
@@ -60,6 +60,7 @@ class AiAvatarSuggest implements AiAvatarSuggestInterface
             /** @phpstan-ignore-next-line  */
             $this->suggestion = $this->cachedSuggestionFor($this->description);
 
+            /** @phpstan-ignore-next-line  */
             return $this->suggestion;
         }
 

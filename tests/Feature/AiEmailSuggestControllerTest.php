@@ -7,7 +7,7 @@ it('should return a suggestion', function () {
     $initialInput = 'https://www.google.com';
     AiAvatarSuggest::fake();
 
-    $response = post(route('ai-avatar-suggest'), ['prompt' => 'prompt'])->assertOk();
+    $response = post(route('ai-avatar-suggest'), ['prompt' => $initialInput])->assertOk();
 
     expect($response->json('suggestion'))
         ->toBe($initialInput);

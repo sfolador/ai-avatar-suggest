@@ -16,8 +16,8 @@ class AiAvatarSuggest extends Facade
         return AiAvatarSuggestInterface::class;
     }
 
-public static function fake(): void
-{
-    static::swap(new AiAvatarSuggestFake());
-}
+    public static function fake(): void
+    {
+        static::swap(new AiAvatarSuggestFake());
+    }
 }

@@ -195,30 +195,31 @@ it('has a fake version of the service', function () {
 
     expect($service)->toBeInstanceOf(AiServiceFake::class);
 });
-
+//
 //it('service returns a createresponse', function () {
-//    $client = mockClient('POST', 'images', [
+//    $client = mockClient('POST', 'images',
+//        [
 //        'prompt' => 'prompt',
 //        'n' => 1,
 //        'size' => config('ai-avatar-suggest.default_size'),
 //        'response_format' => 'url',
-//    ],  [
-//        'id' => 'cmpl-asd23jkmsdfsdf',
-//        'object' => 'text_completion',
-//        'created' => 167812432,
-//        'data' => [
-//            [
-//                'url' => fake()->url(),
+//    ], [
+//            'id' => 'cmpl-asd23jkmsdfsdf',
+//            'object' => 'text_completion',
+//            'created' => 167812432,
+//            'data' => [
+//                [
+//                    'url' => fake()->url(),
 //
+//                ],
 //            ],
-//        ],
-//    ]);
+//        ]);
 //
 //    $service = new \Sfolador\AiAvatarSuggest\Services\AiService($client);
 //
 //    expect($service->getSuggestion('prompt'))->toBeInstanceOf(CreateResponse::class);
 //});
-//
+
 it('should return a suggestion from a controller', function () {
     $initialInput = 'draw a developer with a laptop';
     AiAvatarSuggest::fake();
